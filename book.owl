@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11/"
+     xml:base="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist_of">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#literaryGenre_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#literaryGenre_of">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#literaryGenre"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#publisher_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#publisher_of">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#publisher"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#written_by -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#written_by">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#country -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#country">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#numberOfPages -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#numberOfPages">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#releaseDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#releaseDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#title -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#title">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Genre -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Genre"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Organization -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Organization"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#literaryGenre -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#literaryGenre">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Genre"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#publisher -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#publisher">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Organization"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+
