@@ -47,7 +47,8 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
     WHERE{
         ?book rdf:type dbpedia-owl:Book .
 
-        ?book foaf:name ?name .
+        ?book dbp:name ?name .
+        FILTER(!REGEX(?name, "Book", "i"))
         ?book dbpedia-owl:author ?author .
         ?author dbp:birthName ?Nauthor .
         OPTIONAL {?book dbpedia-owl:genre ?genre}
@@ -56,13 +57,16 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         ?coverArtist dbp:name ?NcoverArtist}
         OPTIONAL {?book dbpedia-owl:numberOfPages ?numberOfPages}
         ?book dbpedia-owl:isbn ?isbn .
+        FILTER(?isbn != "") . # Ensure ISBN is not an empty string
         ?book dbp:releaseDate ?releaseDate .
         OPTIONAL {?book dbpedia-owl:country ?country}
         OPTIONAL {?book dbpedia-owl:language ?lang}
         OPTIONAL {?book dbpedia-owl:Character ?Character}
+
+        FILTER(?country != ?lang) # Ensure country and language are different
         FILTER(LANG(?name)='en')
         }
-    LIMIT 100
+    LIMIT 1000
     """
 
 sparql.setQuery(construct_query)
