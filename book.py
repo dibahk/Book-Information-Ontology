@@ -21,15 +21,18 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
 
     CONSTRUCT {
     ?book rdf:type ma:Book .
+    ?book rdfs:label ?name .
     ?book ma:title ?name .
     ?book ma:written_by ?author .
     ?author rdf:type ma:Author .
+    ?author rdfs:label ?Nauthor .
     ?book ma:published_by ?publisher .
     ?publisher rdf:type ma:publisher .
     ?book ma:has_genre ?genre .
     ?genre rdf:type ma:literaryGenre .
     ?book ma:cover_designed_by ?coverArtist .
     ?coverArtist rdf:type ma:coverArtist .
+    ?coverArtist rdfs:label ?NcoverArtist .
     ?book ma:numberOfPages ?numberOfPages .
     ?book ma:isbn ?isbn .
     ?book ma:releaseDate ?releaseDate .
@@ -43,11 +46,14 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
     }
     WHERE{
         ?book rdf:type dbpedia-owl:Book .
+
         ?book foaf:name ?name .
-        OPTIONAL {?book dbpedia-owl:author ?author}
+        ?book dbpedia-owl:author ?author .
+        ?author dbp:birthName ?Nauthor .
         OPTIONAL {?book dbpedia-owl:genre ?genre}
         OPTIONAL {?book dbpedia-owl:publisher ?publisher}
-        ?book dbpedia-owl:coverArtist ?coverArtist
+        OPTIONAL {?book dbpedia-owl:coverArtist ?coverArtist .
+        ?coverArtist dbp:name ?NcoverArtist}
         OPTIONAL {?book dbpedia-owl:numberOfPages ?numberOfPages}
         ?book dbpedia-owl:isbn ?isbn .
         ?book dbp:releaseDate ?releaseDate .
@@ -56,7 +62,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         OPTIONAL {?book dbpedia-owl:Character ?Character}
         FILTER(LANG(?name)='en')
         }
-    LIMIT 10000
+    LIMIT 100
     """
 
 sparql.setQuery(construct_query)
