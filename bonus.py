@@ -15,6 +15,7 @@ SELECT DISTINCT ?author ?birthdate ?birthplace ?gender WHERE {
 """
 
 # Set SPARQL query and return format
+print("  I might take some time, bear with  me...")
 sparql.setQuery(author_query)
 sparql.setReturnFormat(XML)
 
@@ -23,10 +24,10 @@ author_data = sparql.query().convert()
 
 # Parse existing ontology file (assuming it's in OWL format)
 g = Graph()
-g.parse("book_ipynb.owl")
+g.parse("book_dbpedia.owl")
 
 # Namespace declaration for data properties
-ma = URIRef("http://www.semanticweb.org/ontologies/ECS735/movie.owl#")
+ma = URIRef("http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#")
 
 # Iterate through the results and add data properties to the ontology
 for result in author_data.bindings:
