@@ -159,19 +159,28 @@
 
     <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthDate -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthDate"/>
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
     
 
 
     <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthPlace -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthPlace"/>
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthPlace">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
     
 
 
     <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorGender -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorGender"/>
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorGender">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
     
 
 
