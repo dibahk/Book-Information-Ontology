@@ -41,7 +41,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
     ?book ma:has_language ?lang .
     ?lang rdf:type ma:Language .
     ?book ma:has_character ?Character .
-    ?Character rdf:type ma:Character .        
+    ?Character rdf:type ma:Character . 
     
     }
     WHERE{
