@@ -3,13 +3,6 @@ from rdflib.graph import Graph, URIRef
 from SPARQLWrapper import SPARQLWrapper, XML
 
 # Configuring the end-point and constructing query.
-# Notice the various SPARQL constructs we are making use of:
-#
-#   * PREFIX to bind prefixes in our query
-#   * CONSTRUCT to build new individuals from our query
-#   * OPTIONAL to indicate that some fields may not exist and that's OK
-#   * FILTER to constrain our query in some way
-#
 
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#>
@@ -73,32 +66,19 @@ sparql.setQuery(construct_query)
 sparql.setReturnFormat(XML)
 
 # Creating the RDF store and graph
-# We've seen something similar in the lab sheets before, Week 3. We're telling
-# the rdflib library to create a new graph and store it in memory (so, temporarily).
 
 graph_id = URIRef("http://www.semanticweb.org/store/book")
 g = Graph(identifier = graph_id)
 
-# SPARQL queries can take some time to run, especially if the query is particularly
-# large and you're grabbing very many items. 
-#
-# While experimenting you may want to use the LIMIT construct in SPARQL to take
-# only a couple of items, this way you can experiment with things without waiting
-# ages for a query to complete.
 print("  I might take some time, bear with  me...")
 
 # merging results and saving the store
-# The Week 4 lab showed us this, so we know that running the query will return a
-# valid RDFlib graph.
+
 g = sparql.query().convert()
 
-# We also saw in Week 3 that we can parse files as valid RDFlib graphs too. When
-# we do both of these things, they will be merged together.
+# Parsing the original ontology for merging.
 g.parse("book.owl")
 
-# You can open this file in protege and compare it to the existing `movie.owl`
-# ontology to see what we did. You could also open this in a text editor and have
-# a poke around that way.
 g.serialize("book_dbpedia.owl", "xml")
 
 print("  ...All done!")
