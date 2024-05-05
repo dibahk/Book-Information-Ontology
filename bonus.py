@@ -32,6 +32,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
     ?book ma:releaseDate ?releaseDate .
     ?book ma:has_publish_country ?country .
     ?country rdf:type ma:Country .
+    ?country rdfs:label ?Ncountry .
     ?book ma:has_language ?lang .
     ?lang rdf:type ma:Language .
     ?book ma:has_character ?Character .
@@ -53,14 +54,15 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         ?book dbpedia-owl:isbn ?isbn .
         FILTER(?isbn != "") . # Ensure ISBN is not an empty string
         ?book dbp:releaseDate ?releaseDate .
-        OPTIONAL {?book dbpedia-owl:country ?country}
+        OPTIONAL {?book dbpedia-owl:country ?country .
+        ?country dbp:conventionalLongName ?Ncountry}
         OPTIONAL {?book dbpedia-owl:language ?lang}
         OPTIONAL {?book dbpedia-owl:Character ?Character}
 
         FILTER(?country != ?lang) # Ensure country and language are different
         FILTER(LANG(?name)='en')
         }
-    LIMIT 1000
+    LIMIT 100
     """
 
 sparql.setQuery(construct_query)
@@ -108,15 +110,10 @@ CONSTRUCT {
 WHERE {
     ?author wdt:P31 wd:Q5 .
     ?author rdfs:label "%s"@en .
-    OPTIONAL { ?author wdt:P569 ?BirthDate . 
-            MINUS { 
-            ?author wdt:P569 ?anotherBirthDate . 
-            FILTER(?anotherBirthDate < ?BirthDate) 
-        }
-    } 
-    OPTIONAL { ?author wdt:P19 ?BirthPlace . 
-    FILTER NOT EXISTS { ?BirthPlace wdt:P31 wd:Q6256 } .
-    ?BirthPlace rdfs:label ?birthPlaceName . }
+    OPTIONAL { ?author wdt:P569 ?BirthDate . } 
+    OPTIONAL { ?author wdt:P19 ?BirthPlace .     
+    ?BirthPlace rdfs:label ?birthPlaceName . 
+    FILTER NOT EXISTS { ?BirthPlace wdt:P31 wd:Q6256 }}
     OPTIONAL { ?author wdt:P1971 ?numChild . }
     
     FILTER (LANG(?birthPlaceName) = 'en') .
@@ -130,9 +127,8 @@ WHERE {
     g_bonus = sparql_bonus.query().convert()
     
     for s, p, o in g_bonus:
-
         if str(p) == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" or str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
-            continue
+            print("'True")
         else:
             s = author_uri
 
