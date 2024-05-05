@@ -4,13 +4,6 @@ from rdflib.graph import Graph, URIRef
 from SPARQLWrapper import SPARQLWrapper, XML
 
 # Configuring the end-point and constructing query.
-# Notice the various SPARQL constructs we are making use of:
-#
-#   * PREFIX to bind prefixes in our query
-#   * CONSTRUCT to build new individuals from our query
-#   * OPTIONAL to indicate that some fields may not exist and that's OK
-#   * FILTER to constrain our query in some way
-#
 
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#>
@@ -42,7 +35,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
     ?book ma:has_language ?lang .
     ?lang rdf:type ma:Language .
     ?book ma:has_character ?Character .
-    ?Character rdf:type ma:Character .        
+    ?Character rdf:type ma:Character . 
     
     }
     WHERE{
@@ -74,29 +67,19 @@ sparql.setQuery(construct_query)
 sparql.setReturnFormat(XML)
 
 # Creating the RDF store and graph
-# We've seen something similar in the lab sheets before, Week 3. We're telling
-# the rdflib library to create a new graph and store it in memory (so, temporarily).
 
 graph_id = URIRef("http://www.semanticweb.org/store/book")
 g = Graph(identifier = graph_id)
 
-# SPARQL queries can take some time to run, especially if the query is particularly
-# large and you're grabbing very many items. 
-#
-# While experimenting you may want to use the LIMIT construct in SPARQL to take
-# only a couple of items, this way you can experiment with things without waiting
-# ages for a query to complete.
 print("  I might take some time, bear with  me...")
 
 # merging results and saving the store
-# The Week 4 lab showed us this, so we know that running the query will return a
-# valid RDFlib graph.
+
 g = sparql.query().convert()
 
-# We also saw in Week 3 that we can parse files as valid RDFlib graphs too. When
-# we do both of these things, they will be merged together.
 g.parse("book.owl")
 
+# extracting author names
 author_uris = set()
 for subject, predicate, obj in g.triples((None, RDF.type, None)):
     for s, p, o in g.triples((subject, None, None)):
@@ -107,7 +90,7 @@ sparql_bonus = SPARQLWrapper("https://query.wikidata.org/sparql")
 for author in author_uris:
     author_uri = author
     author = str(author_uri)
-    author_name = author.split('/')[-1].replace('_',' ')
+    author_name = author.rsplit('/',1)[-1].replace('_',' ')
     query_bonus = """
 PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -116,18 +99,23 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 CONSTRUCT {
-    ?author ma:AuthorBirthDate ?birthDate .
-    ?author ma:WasBorn ?birthPlace .
-    ?birthPlace rdf:type ma:BirthPlace .   
-    ?author ma:NumberOfChildren ?numChild
+    ?author ma:AuthorBirthDate ?BirthDate .
+    ?author ma:WasBorn ?BirthPlace .
+    ?BirthPlace rdf:type ma:BirthPlace .   
+    ?BirthPlace rdfs:label ?birthPlaceName .
+    ?author ma:NumberOfChildren ?numChild .
 }
 WHERE {
     ?author wdt:P31 wd:Q5 .
     ?author rdfs:label "%s"@en .
-    ?author wdt:P569 ?birthDate .
-    ?author wdt:P19 ?birthPlace .
-    ?author wdt:P1971 ?numChild
-}
+    OPTIONAL { ?author wdt:P569 ?BirthDate . } 
+    OPTIONAL { ?author wdt:P19 ?BirthPlace . 
+    FILTER NOT EXISTS { ?BirthPlace wdt:P31 wd:Q6256 } .
+    ?BirthPlace rdfs:label ?birthPlaceName . }
+    OPTIONAL { ?author wdt:P1971 ?numChild . }
+    
+    FILTER (LANG(?birthPlaceName) = 'en') .
+    }
 """ % (author_name)
 
     sparql_bonus.setQuery(query_bonus)
@@ -137,6 +125,15 @@ WHERE {
     g_bonus = sparql_bonus.query().convert()
     
     for s, p, o in g_bonus:
-        g.add((author_uri,p,o))
+        if str(p) == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" or str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
+            print("'True")
+        else:
+            s = author_uri
+
+        g.add((s,p,o))
+        print(s)
+        print(p)
+        print(o)
+        print("--------------")
     g.serialize("book_bonus.owl", format="xml")
 print("All Done!")
