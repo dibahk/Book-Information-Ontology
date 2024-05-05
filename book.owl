@@ -39,6 +39,26 @@
     
 
 
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlaceOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlaceOf">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#WasBorn"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlace"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#WasBorn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#WasBorn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlace"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist_of -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#coverArtist_of">
@@ -160,26 +180,18 @@
     <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthDate -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthDate">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthPlace -->
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#NumberOfChildren -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorBirthPlace">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorGender -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#AuthorGender">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#NumberOfChildren">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
@@ -236,6 +248,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Author">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlace -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlace">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Place"/>
     </owl:Class>
     
 
@@ -334,6 +354,26 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#BirthPlace"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Creators"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Language"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#literaryGenre"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Book"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Country"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Creators"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Genre"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#Language"/>
+        </owl:members>
+    </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
