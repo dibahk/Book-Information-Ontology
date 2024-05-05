@@ -108,7 +108,12 @@ CONSTRUCT {
 WHERE {
     ?author wdt:P31 wd:Q5 .
     ?author rdfs:label "%s"@en .
-    OPTIONAL { ?author wdt:P569 ?BirthDate . } 
+    OPTIONAL { ?author wdt:P569 ?BirthDate . 
+            MINUS { 
+            ?author wdt:P569 ?anotherBirthDate . 
+            FILTER(?anotherBirthDate < ?BirthDate) 
+        }
+    } 
     OPTIONAL { ?author wdt:P19 ?BirthPlace . 
     FILTER NOT EXISTS { ?BirthPlace wdt:P31 wd:Q6256 } .
     ?BirthPlace rdfs:label ?birthPlaceName . }
@@ -125,8 +130,9 @@ WHERE {
     g_bonus = sparql_bonus.query().convert()
     
     for s, p, o in g_bonus:
+
         if str(p) == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" or str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
-            print("'True")
+            continue
         else:
             s = author_uri
 
