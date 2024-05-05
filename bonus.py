@@ -110,7 +110,12 @@ CONSTRUCT {
 WHERE {
     ?author wdt:P31 wd:Q5 .
     ?author rdfs:label "%s"@en .
-    OPTIONAL { ?author wdt:P569 ?BirthDate . } 
+    OPTIONAL { ?author wdt:P569 ?BirthDate . 
+        MINUS { 
+            ?author wdt:P569 ?anotherBirthDate . 
+            FILTER(?anotherBirthDate < ?BirthDate) 
+        } 
+        } 
     OPTIONAL { ?author wdt:P19 ?BirthPlace .     
     ?BirthPlace rdfs:label ?birthPlaceName . 
     FILTER NOT EXISTS { ?BirthPlace wdt:P31 wd:Q6256 }}
@@ -118,6 +123,7 @@ WHERE {
     
     FILTER (LANG(?birthPlaceName) = 'en') .
     }
+    LIMIT 1
 """ % (author_name)
 
     sparql_bonus.setQuery(query_bonus)
