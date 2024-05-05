@@ -31,6 +31,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
     ?book ma:releaseDate ?releaseDate .
     ?book ma:has_publish_country ?country .
     ?country rdf:type ma:Country .
+    ?country rdfs:label ?Ncountry .
     ?book ma:has_language ?lang .
     ?lang rdf:type ma:Language .
     ?book ma:has_character ?Character .
@@ -52,7 +53,8 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         ?book dbpedia-owl:isbn ?isbn .
         FILTER(?isbn != "") . # Ensure ISBN is not an empty string
         ?book dbp:releaseDate ?releaseDate .
-        OPTIONAL {?book dbpedia-owl:country ?country}
+        OPTIONAL {?book dbpedia-owl:country ?country .
+        ?country dbp:conventionalLongName ?Ncountry}
         OPTIONAL {?book dbpedia-owl:language ?lang}
         OPTIONAL {?book dbpedia-owl:Character ?Character}
 
