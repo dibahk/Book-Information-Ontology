@@ -4,17 +4,17 @@ import rdflib
 # movie grossed at the box office.
 query = """
 PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/3/untitled-ontology-11#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
-SELECT DISTINCT ?name ?author
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+SELECT DISTINCT ?name ?author 
 WHERE { ?book rdf:type ma:Book .
         ?book ma:title ?name .
-        ?book ma:Author ?author
+        ?book ma:written_by ?author
       }"""
 
 
 # Create an empty RDF graph and then parse our generated ontology into it.
 g = rdflib.Graph()
-g.parse("book_advanced.owl", "xml")
+g.parse("book_dbpedia.owl", "xml")
 
 print("graph has %s statements.\n" % len(g))
 
