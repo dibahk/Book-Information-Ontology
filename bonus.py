@@ -46,7 +46,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         FILTER(!REGEX(?name, "Book", "i"))
         ?book dbpedia-owl:author ?author .
         ?author dbp:birthName ?Nauthor .
-        OPTIONAL {?book dbpedia-owl:genre ?genre}
+        OPTIONAL {?book dbpedia-owl:literaryGenre ?genre .}
         OPTIONAL {?book dbpedia-owl:publisher ?publisher}
         OPTIONAL {?book dbpedia-owl:coverArtist ?coverArtist .
         ?coverArtist dbp:name ?NcoverArtist}
@@ -62,7 +62,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         FILTER(?country != ?lang) # Ensure country and language are different
         FILTER(LANG(?name)='en')
         }
-    LIMIT 100
+    LIMIT 1000
     """
 
 sparql.setQuery(construct_query)
@@ -102,7 +102,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 
 CONSTRUCT {
     ?author ma:AuthorBirthDate ?BirthDate .
-    ?author ma:WasBorn ?BirthPlace .
+    ?author ma:WasBornIn ?BirthPlace .
     ?BirthPlace rdf:type ma:BirthPlace .   
     ?BirthPlace rdfs:label ?birthPlaceName .
     ?author ma:NumberOfChildren ?numChild .
@@ -134,14 +134,11 @@ WHERE {
     
     for s, p, o in g_bonus:
         if str(p) == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" or str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
-            print("'True")
+            s = s
         else:
             s = author_uri
 
         g.add((s,p,o))
-        print(s)
-        print(p)
-        print(o)
-        print("--------------")
+        
     g.serialize("book_bonus.owl", format="xml")
 print("All Done!")
