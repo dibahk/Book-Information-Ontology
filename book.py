@@ -1,3 +1,4 @@
+
 import rdflib
 from rdflib.graph import Graph, URIRef
 from SPARQLWrapper import SPARQLWrapper, XML
@@ -45,7 +46,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         FILTER(!REGEX(?name, "Book", "i"))
         ?book dbpedia-owl:author ?author .
         ?author dbp:birthName ?Nauthor .
-        OPTIONAL {?book dbpedia-owl:genre ?genre}
+        OPTIONAL {?book dbpedia-owl:genre ?genre .}
         OPTIONAL {?book dbpedia-owl:publisher ?publisher}
         OPTIONAL {?book dbpedia-owl:coverArtist ?coverArtist .
         ?coverArtist dbp:name ?NcoverArtist}
