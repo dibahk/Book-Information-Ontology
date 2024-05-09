@@ -106,6 +106,8 @@ CONSTRUCT {
     ?BirthPlace rdf:type ma:BirthPlace .   
     ?BirthPlace rdfs:label ?birthPlaceName .
     ?author ma:NumberOfChildren ?numChild .
+    ?author ma:Gender ?gender .
+    ?gender rdfs:label ?gendern .
 }
 WHERE {
     ?author wdt:P31 wd:Q5 .
@@ -120,6 +122,9 @@ WHERE {
     ?BirthPlace rdfs:label ?birthPlaceName . 
     FILTER NOT EXISTS { ?BirthPlace wdt:P31 wd:Q6256 }}
     OPTIONAL { ?author wdt:P1971 ?numChild . }
+    OPTIONAL { ?author wdt:P21 ?gender .
+    ?gender rdfs:label ?gendern .
+    FILTER (lang(?gendern) = "en") .}
     
     FILTER (LANG(?birthPlaceName) = 'en') .
     }
@@ -137,7 +142,7 @@ WHERE {
             s = s
         else:
             s = author_uri
-
+        
         g.add((s,p,o))
         
     g.serialize("book_bonus.owl", format="xml")
