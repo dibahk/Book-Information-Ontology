@@ -62,7 +62,7 @@ construct_query="""PREFIX ma: <http://www.semanticweb.org/dibah/ontologies/2024/
         FILTER(?country != ?lang) # Ensure country and language are different
         FILTER(LANG(?name)='en')
         }
-    LIMIT 100
+    LIMIT 1000
     """
 
 sparql.setQuery(construct_query)
