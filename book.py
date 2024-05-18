@@ -80,7 +80,7 @@ print("  I might take some time, bear with  me...")
 g = sparql.query().convert()
 
 # Parsing the original ontology for merging.
-g.parse("book.owl")
+g.parse("Book_Ontology.owl")
 
 g.serialize("book_dbpedia.owl", "xml")
 
